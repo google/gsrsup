@@ -23,6 +23,16 @@ object once its upload has completed. If you run
 twice, the second invocation will skip uploading altogether and only run the
 integrity-checking code.
 
+## Building
+
+`gsrsup` builds using a handwritten [Ninja](https://ninja-build.org/) file.
+Simply run `ninja` to create a development build. You can also run Ninja with a
+custom build file to request a different profile:
+
+  - `ninja -f buildconf/asan.ninja`: Build with AddressSanitizer.
+  - `ninja -f buildconf/dbg.ninja`: Build for debugging.
+  - `ninja -f buildconf/release.ninja`: Build with optimizations.
+
 ---
 
 This is not an official Google product.
