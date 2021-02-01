@@ -1,3 +1,4 @@
+#!/bin/sh
 # Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -12,7 +13,12 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-*.o
-*_test
-.ninja_*
-gsrsup
+set -eu
+
+readonly TESTS=log_test
+
+cd "$(dirname "$(realpath "$0")")/.."
+ninja $TESTS
+for test in $TESTS; do
+	./$test
+done
