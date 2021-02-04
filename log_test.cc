@@ -56,5 +56,29 @@ TEST(LogTest, HidesUninterestingMessages) {
   EXPECT_THAT(s.str(), IsEmpty());
 }
 
+TEST(LogTest, DedicatedDebugFunction) {
+  std::ostringstream s;
+  Log("program", Log::kDebug, s).Debug("message");
+  EXPECT_THAT(s.str(), HasSubstr("debug:"));
+}
+
+TEST(LogTest, DedicatedInfoFunction) {
+  std::ostringstream s;
+  Log("program", s).Info("message");
+  EXPECT_EQ(s.str(), "program: message\n");
+}
+
+TEST(LogTest, DedicatedWarningFunction) {
+  std::ostringstream s;
+  Log("program", s).Warning("message");
+  EXPECT_THAT(s.str(), HasSubstr("warning:"));
+}
+
+TEST(LogTest, DedicatedErrorFunction) {
+  std::ostringstream s;
+  Log("program", s).Error("message");
+  EXPECT_THAT(s.str(), HasSubstr("error:"));
+}
+
 }  // namespace
 }  // namespace gsrsup

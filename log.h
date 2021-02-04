@@ -61,6 +61,26 @@ class Log final {
   template <typename... Args>
   void Message(Level, Args...);
 
+  template <typename... Args>
+  void Debug(Args... args) {
+    Message(kDebug, args...);
+  }
+
+  template <typename... Args>
+  void Info(Args... args) {
+    Message(kInfo, args...);
+  }
+
+  template <typename... Args>
+  void Warning(Args... args) {
+    Message(kWarning, args...);
+  }
+
+  template <typename... Args>
+  void Error(Args... args) {
+    Message(kError, args...);
+  }
+
  private:
   std::string prefix_;
   Level minimum_level_;
