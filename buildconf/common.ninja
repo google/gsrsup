@@ -30,8 +30,9 @@ rule link
 
 build gsrsup.o: cxx gsrsup.cc
 build gsrsup: link gsrsup.o
+build log.o: cxx log.cc
 build log_test.o: cxx log_test.cc
-build log_test: link log_test.o
+build log_test: link log.o log_test.o
   libs = -lgmock_main -lgmock -lgtest -labsl_strings -pthread
 
 default gsrsup

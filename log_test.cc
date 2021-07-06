@@ -80,5 +80,17 @@ TEST(LogTest, DedicatedErrorFunction) {
   EXPECT_THAT(s.str(), HasSubstr("error:"));
 }
 
+TEST(LogTest, CheckPasses) {
+  std::ostringstream s;
+  Log log("program", s);
+  CHECK(log, 2 + 2 == 4);
+  EXPECT_THAT(s.str(), IsEmpty());
+}
+
+TEST(LogDeathTest, CheckFails) {
+  Log log("program", std::cerr);
+  EXPECT_DEATH(CHECK(log, 2 + 2 == 5), "internal error \\(.*\\): 2 \\+ 2 == 5");
+}
+
 }  // namespace
 }  // namespace gsrsup

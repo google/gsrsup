@@ -111,6 +111,14 @@ void Log::Message(Level level, Args... args) {
   out_->write(message.data(), message.size());
 }
 
+// If condition is false, logs an internal error and exits the program.
+void Check(Log& log, bool condition, const char* condition_str,
+           const char* file, int line);
+
 }  // namespace gsrsup
+
+// A convenience macro to invoke the Check function.
+#define CHECK(log, condition) \
+  ::gsrsup::Check((log), (condition), #condition, __FILE__, __LINE__)
 
 #endif  // GSRSUP_LOG_H_
